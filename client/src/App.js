@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function App() {
-  return <h1>Hello from Civic Complaint Assistant</h1>;
+  return <h1>Hello again from Civic Complaint Assistant</h1>; // tiny tweak
 }
