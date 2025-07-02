@@ -1,0 +1,8 @@
+# Node
+client/node_modules
+client/.env
+
+# Python
+server/venv/
+__pycache__/
+server/.env

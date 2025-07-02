@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civic Complaint Assistant</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #0078d4;
+      --primary-hover: #005fa3;
+      --background: #f1f6fa;
+      --card-bg: #ffffff;
+      --text: #333;
+    }
+
+    [data-theme="dark"] {
+      --primary: #0a84ff;
+      --primary-hover: #0060df;
+      --background: #1e1e1e;
+      --card-bg: #2c2c2c;
+      --text: #f0f0f0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--background);
+      padding: 2rem;
+      max-width: 720px;
+      margin: auto;
+      color: var(--text);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    textarea, input[type="file"], button {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 500px) {
+      .button-group {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    #result, #location {
+      margin-top: 1rem;
+      font-weight: 500;
+      background: #eef3f8;
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 2rem;
+    }
+
+    .theme-toggle {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <h2>🛠️ Civic Complaint Assistant</h2>
+
+  <div class="theme-toggle">
+    <label style="font-size: 0.9rem;">
+      <input type="checkbox" id="themeToggle" />
+      🌙 Enable Dark Mode
+    </label>
+  </div>
+
+  <div class="section">
+    <label for="complaint">Your Complaint</label>
+    <textarea id="complaint" rows="4" placeholder="Describe your complaint…"></textarea>
+    <div class="button-group">
+      <button onclick="sendComplaint()"><i class="fas fa-brain"></i> Classify Complaint</button>
+      <button id="mic"><i class="fas fa-microphone"></i> Speak Complaint</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <label for="image">Upload Image (optional)</label>
+    <input type="file" id="image" accept="image/*" />
+    <button onclick="getLocation()" style="margin-top: 1rem;">
+      <i class="fas fa-map-marker-alt"></i> Get Location
+    </button>
+    <p id="location"></p>
+  </div>
+
+  <div class="section">
+    <button onclick="window.open('dashboard.html', '_blank')">
+      <i class="fas fa-table"></i> View Dashboard
+    </button>
+  </div>
+
+  <div id="result"></div>
+
+  <div class="footer">
+    Built by Niranjani • Powered by FastAPI & AI 🚀
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const toggle = document.getElementById("themeToggle");
+    const root = document.body;
+
+    if (localStorage.getItem("theme") === "dark") {
+      root.setAttribute("data-theme", "dark");
+      toggle.checked = true;
+    }
+
+    toggle.addEventListener("change", () => {
+      const theme = toggle.checked ? "dark" : "light";
+      root.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    });
+  </script>
+</body>
+</html>
