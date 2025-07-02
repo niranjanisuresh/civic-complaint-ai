@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App'; // 👈 This MUST match the exact case and file name
+import App from './MainApp'; // 👈 This MUST match the exact case and file name
 import reportWebVitals from './reportWebVitals';
 
 // 🧠 Grab the <div id="root"></div> from client/public/index.html
